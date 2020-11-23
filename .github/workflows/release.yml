@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - trunk
+  pull_request:
+    branches:
+      - trunk
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+    - name: Cache Python
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+      - name: Cache Node
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Cache Packer
+        uses: actions/cache@v2
+        with:
+          path: packer_cache 
+          key: ${{ runner.os }}-packer-${{ hashFiles('**/workstation.json') }}
+          restore-keys: |
+            ${{ runner.os }}-packer-
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Setup Python
+        uses: actions/setup-python@v2.1.4
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Install dependencies
+        run: |
+          brew tap hashicorp/tap
+          brew install hashicorp/tap/packer
+          npm ci
+          pip3 install -r ansible/requirements.txt
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VAGRANT_ACCESS_TOKEN: ${{ secrets.VAGRANT_ACCESS_TOKEN }}
+        run: npx semantic-release

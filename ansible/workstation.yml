@@ -1,0 +1,13 @@
+- hosts: all
+  roles:
+  - escapace.swap
+  - escapace.tuned
+  - escapace.sudo
+  - escapace.packagecloud
+  - escapace.ntp
+  - escapace.unattended-upgrades
+  - escapace.ssh
+  - escapace.tunnelbroker
+  - escapace.wireguard
+  - escapace.docker
+  - escapace.dotfiles
