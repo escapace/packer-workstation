@@ -11,7 +11,7 @@ module.exports = {
       {
         shell: true,
         publishCmd: [
-          'packer build -var "version=${nextRelease.version}" workstation.json'
+          'packer build -machine-readable -var "version=${nextRelease.version}" workstation.json'
         ]
           .map((string) =>
             string
