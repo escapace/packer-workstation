@@ -1,5 +1,6 @@
 - hosts: all
   roles:
+  - escapace.normalize
   - escapace.swap
   - escapace.tuned
   - escapace.sudo
