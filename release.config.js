@@ -1,5 +1,5 @@
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY
-const NAME = REPOSITORY.match('(?:escapace/)(.+)')[1]
+const NAME = GITHUB_REPOSITORY.match('(?:escapace/)(.+)')[1]
 
 module.exports = {
   branches: ['trunk'],
