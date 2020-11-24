@@ -1,6 +1,5 @@
- .python-version
-
- .manage_modules
+.python-version
+.manage_modules
 
 # Cache objects
 packer_cache/
