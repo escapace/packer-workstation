@@ -6,7 +6,7 @@
   - escapace.sudo
   - escapace.packagecloud
   - escapace.ntp
-  - escapace.unattended-upgrades
+  - escapace.unattended_upgrades
   - escapace.ssh
   - escapace.docker
   - escapace.dotfiles

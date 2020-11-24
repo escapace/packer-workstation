@@ -1,5 +1,6 @@
 .python-version
 .manage_modules
+output-virtualbox-iso
 
 # Cache objects
 packer_cache/
