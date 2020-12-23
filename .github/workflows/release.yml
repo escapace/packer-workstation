@@ -43,11 +43,13 @@ jobs:
     - name: Install dependencies
       run: |
         brew tap hashicorp/tap
-        brew install hashicorp/tap/packer
+        brew upgrade hashicorp/tap/packer || true
         npm ci
         pip3 install -r ansible/requirements.txt
+    - name: Check syntax
+      run: packer validate -syntax-only workstation.pkr.hclt
     - name: Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VAGRANT_ACCESS_TOKEN: ${{ secrets.VAGRANT_ACCESS_TOKEN }}
+        PKR_VAR_access_token: ${{ secrets.VAGRANT_ACCESS_TOKEN }}
       run: npx semantic-release
