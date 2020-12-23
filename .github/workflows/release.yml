@@ -47,7 +47,7 @@ jobs:
         npm ci
         pip3 install -r ansible/requirements.txt
     - name: Check syntax
-      run: packer validate -syntax-only workstation.pkr.hclt
+      run: packer validate -syntax-only workstation.pkr.hcl
     - name: Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
